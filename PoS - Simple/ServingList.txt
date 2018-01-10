@@ -1,0 +1,2 @@
+Small 70.0
+Medium 130.0

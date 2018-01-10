@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="adminAP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="226.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.AdminController">
+   <children>
+      <MenuBar layoutX="98.0" layoutY="56.0" prefHeight="25.0" prefWidth="226.0" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="closeMI" mnemonicParsing="false" onAction="#closeMIAction" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <VBox layoutX="14.0" layoutY="41.0" prefHeight="359.0" prefWidth="226.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+         <children>
+            <Button fx:id="createAccBtn" mnemonicParsing="false" onAction="#buttonAction" prefHeight="25.0" prefWidth="229.0" text="Create Account" />
+            <Button fx:id="editAccBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="25.0" prefWidth="229.0" text="Edit/Delete Account" />
+            <Button fx:id="addInventoryBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="25.0" prefWidth="229.0" text="Add Inventory" />
+            <Button fx:id="editInventoryBtn" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="25.0" prefWidth="229.0" text="Edit/Delete Inventory" />
+            <Button fx:id="addServingBtn" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="25.0" prefWidth="229.0" text="Add Servings" />
+            <Button fx:id="editServingBtn" layoutX="15.0" layoutY="150.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="25.0" prefWidth="229.0" text="Edit/Delete Servings" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

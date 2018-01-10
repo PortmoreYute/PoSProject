@@ -1,0 +1,4 @@
+Peanut 40 45.0
+Sugar 10 110.0
+Rice 10 80.0
+Jerk_Chicken 120 100

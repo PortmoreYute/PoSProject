@@ -1,0 +1,241 @@
+package Sales;
+
+import Objects.InventoryItem;
+import Objects.Log;
+import Objects.OrderItem;
+import Objects.ServingItem;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.ResourceBundle;
+import java.util.Scanner;
+
+public class SaleController implements Initializable {
+    @FXML private ComboBox<String> itemCB = new ComboBox<>();
+    @FXML private ComboBox<String> servingCB = new ComboBox<>();
+    @FXML private TextField quantityTF,subCostTF,totalTF;
+    @FXML private TextArea instructionTA;
+    @FXML private ListView itemLV;
+    @FXML private TableView orderTV;
+    @FXML private TableColumn<Order,String> itemTC;
+    @FXML private TableColumn<Order,String>servingTC;
+    @FXML private TableColumn<Order,Integer>quantityTC;
+    @FXML private TableColumn<Order,Float>subCostTC;
+    @FXML private TableColumn<Order,String>instructionTC;
+    @FXML private AnchorPane saleAP;
+    @FXML private Button orderBtn,removeItemBtn;
+    private ObservableList<Order> data = FXCollections.observableArrayList();
+    private Log log;
+
+
+    public Log getLog() {
+        return log;
+    }
+    public void setLog(Log log) {
+        this.log = log;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initializeItemComboBox();
+        initializeServingComboBox();
+        addListeners();
+        setProperties();
+    }
+    //Supplementary Functions
+    public void addListeners(){
+        quantityTF.textProperty().addListener((obs, oldText, newText) -> {
+            updateInputCost (newText);
+        });
+    }
+    public void setProperties(){
+        itemTC.setCellValueFactory(new PropertyValueFactory<Order, String>("itemName"));
+        quantityTC.setCellValueFactory(new PropertyValueFactory<Order, Integer>("itemQuantity"));
+        subCostTC.setCellValueFactory(new PropertyValueFactory<Order, Float>("subCost"));
+        servingTC.setCellValueFactory(new PropertyValueFactory<Order, String>("serving"));
+        instructionTC.setCellValueFactory(new PropertyValueFactory<Order, String>("instructions"));
+    }
+
+    //Control Actions
+    public void addButtonAction(ActionEvent actionEvent) {
+        //addToOrder();
+        addToOrderTC();
+    }
+
+    public void orderButtonAction(ActionEvent actionEvent) {
+        if(actionEvent.getSource().equals(orderBtn)){
+
+        }
+
+        if(actionEvent.getSource().equals(removeItemBtn)){
+            System.out.println("Button");
+            //itemLV.getItems().remove(itemLV.getSelectionModel().getSelectedItem());
+            orderTV.getItems().remove(orderTV.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    public void closeMIAction() throws IOException {
+        Node source = saleAP;
+        Stage stage  = (Stage) source.getScene().getWindow();
+        this.log.logUser();
+        stage.close();
+        loginView();
+    }
+
+    public void updateInputCost(String text) {
+        float subCost;
+        int quantity = 0;
+        String temp = text;
+        System.out.println(temp);
+        if(!quantityTF.getText().equals("")){
+            quantity = Integer.parseInt(quantityTF.getText());
+        }
+        subCost = (findItemCost() * quantity) + findServingCost();
+        subCostTF.setText(String.valueOf(subCost));
+    }
+
+    //Logic Functions
+    private void addToOrder(){
+        float total = 0;
+        float itemQuantityCost;
+
+        Order order = new Order();
+        order.setItemName(itemCB.getValue());
+        order.setItemQuantity(Integer.parseInt(quantityTF.getText()));
+        order.setSubCost(Float.parseFloat(subCostTF.getText()));
+
+        itemLV.getItems().addAll(order.display());
+
+        itemQuantityCost = Float.parseFloat(subCostTF.getText());
+        if (!totalTF.getText().equals("")) {
+            total = Float.parseFloat(totalTF.getText());
+        }
+        total = total + itemQuantityCost;
+        totalTF.setText(String.valueOf(total));
+    }
+
+    private void addToOrderTC(){
+        Order temp = new Order(itemCB.getValue(),Integer.parseInt(quantityTF.getText()),servingCB.getValue(),instructionTA.getText(),Float.parseFloat(subCostTF.getText()));
+        data.add(temp);
+        orderTV.setItems(data);
+    }
+
+
+
+    private float findItemCost(){
+        float cost = 0;
+        Scanner inFile;
+        File accFile = new File("ItemList.txt");
+        InventoryItem tempItem = new InventoryItem();
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()){
+                tempItem.setItemName(inFile.next());
+                tempItem.setQuantity(inFile.nextInt());
+                tempItem.setItemPrice(inFile.nextFloat());
+                if(tempItem.getItemName().equals(itemCB.getValue())){
+                    cost = tempItem.getItemPrice();
+                }
+            }
+            inFile.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return cost;
+    }
+
+    private void initializeItemComboBox(){
+        ArrayList<String> itemList = new ArrayList<>();
+        Scanner inFile;
+        File accFile = new File("ItemList.txt");
+        InventoryItem tempItem = new InventoryItem();
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()){
+                tempItem.setItemName(inFile.next());
+                tempItem.setQuantity(inFile.nextInt());
+                tempItem.setItemPrice(inFile.nextFloat());
+                itemList.add(tempItem.getItemName());
+            }
+            inFile.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        itemCB.getItems().addAll(itemList);
+    }
+
+    private float findServingCost(){
+        float cost = 0;
+        Scanner inFile;
+        File accFile = new File("ServingList.txt");
+        ServingItem tempItem = new ServingItem();
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()){
+                tempItem.setName(inFile.next());
+                tempItem.setPrice(inFile.nextFloat());
+                if(tempItem.getName().equals(servingCB.getValue())){
+                    cost = tempItem.getPrice();
+                }
+            }
+            inFile.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return cost;
+    }
+
+    private void initializeServingComboBox(){
+        ArrayList<String> servingList = new ArrayList<>();
+        Scanner inFile;
+        File accFile = new File("ServingList.txt");
+        ServingItem tempItem = new ServingItem();
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()){
+                tempItem.setName(inFile.next());
+                tempItem.setPrice(inFile.nextFloat());
+                servingList.add(tempItem.getName());
+            }
+            inFile.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        servingCB.getItems().addAll(servingList);
+    }
+
+
+    //View Functions
+    private void loginView() throws IOException {
+        Parent test;
+        test = FXMLLoader.load(getClass().getClassLoader().getResource("Login/LoginView.fxml"));
+        Scene scene = new Scene(test);
+        Stage stage = new Stage();
+        //stage.initStyle(StageStyle.TRANSPARENT);
+        //scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+}

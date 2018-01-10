@@ -1,0 +1,4 @@
+Changed Account Edit and Delete Functions into one EditDeleteFunction
+Changed Item Edit and Delete Functions into one EditDeleteFunction
+Changed Serving Edit and Delete Functions into one EditDeleteFunction
+Added Feedback to User On Action Performed

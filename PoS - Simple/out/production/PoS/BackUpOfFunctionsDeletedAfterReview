@@ -1,0 +1,164 @@
+  ////////////////////////////////////////////////////////////////////////////////////////////EditDeleteAccountController
+    private void deleteAccount(){
+        Scanner inFile;
+        File accFile = new File("UserAccount.txt");
+        File tempFile = new File("TempAccountFile.txt");
+        Account tempACC = new Account();
+
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()) {
+                tempACC.setFirstName(inFile.next());
+                tempACC.setLastName(inFile.next());
+                tempACC.setPhoneNumber(inFile.next());
+                tempACC.setUsername(inFile.next());
+                tempACC.setPassword(inFile.next());
+                if (!userCB.getValue().equals(tempACC.getUsername())) {
+                    writeTempFile(tempACC);
+                }
+            }
+            inFile.close();
+            accFile.delete();
+            tempFile.renameTo(new File("UserAccount.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void editAccount(){
+        Scanner inFile;
+        File accFile = new File("UserAccount.txt");
+        File tempFile = new File("TempAccountFile.txt");
+        Account tempACC = new Account();
+
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()) {
+                tempACC.setFirstName(inFile.next());
+                tempACC.setLastName(inFile.next());
+                tempACC.setPhoneNumber(inFile.next());
+                tempACC.setUsername(inFile.next());
+                tempACC.setPassword(inFile.next());
+                if (!userCB.getValue().equals(tempACC.getUsername())) {
+                    writeTempFile(tempACC);
+                }else
+                {
+                    tempACC.setFirstName(firstNameTF.getText());
+                    tempACC.setLastName(lastNameTF.getText());
+                    tempACC.setPhoneNumber(phoneNumTF.getText());
+                    tempACC.setPassword(passwordTF.getText());
+                    writeTempFile(tempACC);
+                }
+            }
+            inFile.close();
+            accFile.delete();
+            tempFile.renameTo(new File("UserAccount.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+////////////////////////////////////////////////////////////////////////////////////////////EditDeleteAccountController
+
+
+///////////////////////////////////////////////////////////////////////////////////////////EditDeleteItemController
+ private void deleteItem(){
+        Scanner inFile;
+        File accFile = new File("ItemList.txt");
+        File tempFile = new File("TempItemFile.txt");
+        InventoryItem tempItem = new InventoryItem();
+
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()) {
+                tempItem.setItemName(inFile.next());
+                tempItem.setQuantity(inFile.nextInt());
+                tempItem.setItemPrice(inFile.nextFloat());
+                if (!tempItem.getItemName().equals(itemCB.getValue())) {
+                    addItemToTempFile(tempItem);
+                }
+            }
+            inFile.close();
+            accFile.delete();
+            tempFile.renameTo(new File("ItemList.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void editItem(){
+        Scanner inFile;
+        File accFile = new File("ItemList.txt");
+        File tempFile = new File("TempItemFile.txt");
+        InventoryItem tempItem = new InventoryItem();
+
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()) {
+                tempItem.setItemName(inFile.next());
+                tempItem.setQuantity(inFile.nextInt());
+                tempItem.setItemPrice(inFile.nextFloat());
+                if (!tempItem.getItemName().equals(itemCB.getValue())) {
+                    tempItem.setQuantity(Integer.parseInt(itemQuantityTF.getText()));
+                    tempItem.setItemPrice(Float.parseFloat(itemPriceTF.getText()));
+                }
+                addItemToTempFile(tempItem);
+            }
+            inFile.close();
+            accFile.delete();
+            tempFile.renameTo(new File("ItemList.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////EditDeleteItemController
+
+/////////////////////////////////////////////////////////////////////////////EditDeleteServingController
+    private void deleteItem(){
+        Scanner inFile;
+        File accFile = new File("ServingList.txt");
+        File tempFile = new File("TempServing.txt");
+        ServingItem tempServing = new ServingItem();
+
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()) {
+                tempServing.setName(inFile.next());
+                tempServing.setPrice(inFile.nextFloat());
+                if (!tempServing.getName().equals(servingCB.getValue())) {
+                    addItemToTempFile(tempServing);
+                }
+            }
+            inFile.close();
+            accFile.delete();
+            tempFile.renameTo(new File("ServingList.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void editItem(){
+        Scanner inFile;
+        File accFile = new File("ServingList.txt");
+        File tempFile = new File("TempServing.txt");
+        ServingItem tempServing = new ServingItem();
+
+        try {
+            inFile = new Scanner(accFile);
+            while (inFile.hasNext()) {
+                tempServing.setName(inFile.next());
+                tempServing.setPrice(inFile.nextFloat());
+                if (tempServing.getName().equals(servingCB.getValue())) {
+                    tempServing.setPrice(Float.parseFloat(servingPriceTF.getText()));
+                }
+                addItemToTempFile(tempServing);
+            }
+            inFile.close();
+            accFile.delete();
+            tempFile.renameTo(new File("ServingList.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+/////////////////////////////////////////////////////////////////////////////EditDeleteServingController

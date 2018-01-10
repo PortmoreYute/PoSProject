@@ -1,0 +1,14 @@
+Revisit Writing Object to File
+Add Feedback on user button presses
+Use More Objects
+ReUse functions to reduce amount of code where possible (The way editing files is done)
+Check inconsistency with naming variables, controls and functions
+Add comments
+Add method to change admin information rather than hard coding username and pass
+Fix Layout of several views
+Prevent Resizing on All stages or find dynamic solution
+Maybe change Special Instructions to a check box
+Give temp files created to edit info different temp file names
+Cancel Order Logic may need revision
+Check where we can make the code cleaner
+Use Keyboard to perform actions

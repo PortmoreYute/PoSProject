@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.AddInventoryController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="103.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="217.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="347.0" minHeight="0.0" prefHeight="48.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="127.0" minHeight="0.0" prefHeight="48.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="301.0" text="Item Name" GridPane.rowIndex="1" />
+      <TextField fx:id="itemNameTF" alignment="CENTER" promptText="ItemName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="301.0" text="Quantity:" GridPane.rowIndex="2" />
+      <TextField fx:id="itemQuantityTF" alignment="CENTER" promptText="Quantity" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="301.0" text="Price:" GridPane.rowIndex="3" />
+      <TextField fx:id="itemPriceTF" alignment="CENTER" promptText="Price" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="35.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <children>
+            <Button fx:id="addBtn" mnemonicParsing="false" onAction="#buttonAction" text="Add" />
+            <Button fx:id="cancelBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonAction" text="Cancel" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="35.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</GridPane>

@@ -1,0 +1,17 @@
+1 -NoItemSelected- -NoServingSelected- 1 0.0 -NoInstruction- ∂
+2 -NoItemSelected- -NoServingSelected- 1 0.0 ad ∂
+3 -NoItemSelected- -NoServingSelected- 1 0.0 -NoInstruction- ∂
+4 -NoItemSelected- -NoServingSelected- 1 0.0 ad ∂
+5 -NoItemSelected- -NoServingSelected- 1 0.0 -NoInstruction- ∂
+7 Peanut Small 23 1105.0 adada ∂
+8 Sugar Medium 123 13660.0 adsad ∂
+9 Rice Medium 11 1010.0 adasd ∂
+10 Peanut Small 123 5605.0 dasda ∂
+11 Sugar Small 12 1390.0 adsad ∂
+11 Sugar Small 312 34390.0 adads ∂
+12 Sugar Medium 321 35440.0 da ∂
+12 Sugar Small 13 1500.0 adfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff ∂
+13 Sugar Medium 12 1450.0 ads ∂
+14 Sugar Small 13 1500.0 adasdad ∂
+14 Sugar Medium 32 3650.0 -NoInstruction- ∂
+15 Jerk_Chicken Small 1 170.0 dasd ∂
